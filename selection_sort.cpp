@@ -1,30 +1,32 @@
 #include<iostream>
 using namespace std;
-void bubbleSort(int *array, int size){
-   for(int i = 0; i<size; i++) {
-      int swaps = 0; //flag to detect any swap is there or not
-      for(int j = 0; j<size-i-1; j++) {
-         if(array[j] > array[j+1]) { //when the current item is bigger than next
-            int temp;
-            temp = array[j];
-            array[j] = array[j+1];
-            array[j+1] = temp;
-            swaps = 1; //set swap flag
-         }
-      }
-      if(!swaps)
-         break; // No swap in this pass, so array is sorted
+void swapping(int &a, int &b) {  //swap the content of a and b
+   int temp;
+   temp = a;
+   a = b;
+   b = temp;
+}
+void selectionSort(int *array, int size){
+   int i, j, imin;
+   for(i = 0; i<size-1; i++) {
+      imin = i; //get index of minimum data
+      for(j = i+1; j<size; j++)
+         if(array[j] < array[imin])
+            imin = j;
+
+      //placing in correct position
+      swap(array[i], array[imin]);
    }
 }
 int main(){
    int n;
    n = 5;
-   int arr[5] = {67, 44, 82, 17, 20}; //initialize an array
+   int arr[5] = {12, 19, 55, 2, 16}; // initialize the array
    cout << "Array before Sorting: ";
    for(int i = 0; i<n; i++)
       cout << arr[i] << " ";
    cout << endl;
-   bubbleSort(arr, n);
+   selectionSort(arr, n);
    cout << "Array after Sorting: ";
    for(int i = 0; i<n; i++)
       cout << arr[i] << " ";
